@@ -11,7 +11,13 @@ import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import com.scottyab.aescrypt.AESCrypt
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.clearButton
+import kotlinx.android.synthetic.main.activity_main.copyButton
+import kotlinx.android.synthetic.main.activity_main.decryptButton
+import kotlinx.android.synthetic.main.activity_main.decryptedText
+import kotlinx.android.synthetic.main.activity_main.encryptButton
+import kotlinx.android.synthetic.main.activity_main.enteredText
+import kotlinx.android.synthetic.main.activity_main.mainActivityRoot
 import java.security.GeneralSecurityException
 
 
@@ -61,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     fun encrypt(message : String) : String? {
         var encryptedMessage = ""
         try {
-            encryptedMessage = AESCrypt.encrypt(password, message)
+            encryptedMessage = AESCrypt.encrypt(BuildConfig.CRYPT_PASSWORD, message)
         } catch (e: GeneralSecurityException) {
             return null
         }
@@ -71,7 +77,7 @@ class MainActivity : AppCompatActivity() {
     fun decrypt(encryptedText: String) : String? {
         var decryptedMessage: String? = null
         try {
-            decryptedMessage = AESCrypt.decrypt(password, encryptedText)
+            decryptedMessage = AESCrypt.decrypt(BuildConfig.CRYPT_PASSWORD, encryptedText)
         } catch (e: GeneralSecurityException) {
             return decryptedMessage
         }
@@ -96,9 +102,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    companion object {
-        private const val password = "sharuarun"
     }
 }
