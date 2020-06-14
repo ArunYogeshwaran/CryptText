@@ -2,3 +2,5 @@ build
 .idea
 .gradle
 keys.properties
+keystore.properties
+app/key.jks
